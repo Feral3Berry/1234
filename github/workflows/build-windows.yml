@@ -1,0 +1,28 @@
+name: Build Windows exe
+
+on:
+  workflow_dispatch:   # запуск вручную кнопкой "Run workflow"
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pynput pyinstaller
+
+      - name: Build exe
+        run: pyinstaller --onefile --windowed --name Autoclicker autoclicker_gui.py
+
+      - name: Upload exe
+        uses: actions/upload-artifact@v4
+        with:
+          name: Autoclicker-windows
+          path: dist/Autoclicker.exe
