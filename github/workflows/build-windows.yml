@@ -1,9 +1,8 @@
 name: Build Windows exe
 
 on:
-  workflow_dispatch:   # запуск вручную кнопкой "Run workflow"
+  workflow_dispatch:
   push:
-    branches: [main]
 
 jobs:
   build:
